@@ -24,6 +24,14 @@ def signup(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
+class VaultCreate(LoginRequiredMixin, CreateView):
+    model = Vault
+    fields = ['name', 'site', 'description', 'pw']
+
+def form_valid(self, form):
+    form.instance.user = self.request.user
+    return super().form_valid(form)
+
 SIMILARS = {'o', 'O', '0', 'I', 'l', '1', '|'}
 
 def generate_password(request):
@@ -63,6 +71,13 @@ def about(request):
 def vaults_index(request):
     vaults = Vault.objects.filter(user = request.user)
     return render(request, 'password/index.html', { 'vaults': vaults })
+
+def vaults_detail(request, vault_id):
+    vault = Vault.objects.get(id=vault_id)
+    gen_pass_form = PasswordGeneratorForm()
+    return render(request, 'vaults/detail.html', {
+    'vault': vault, 'gen_pass_form': gen_pass_form,
+  })
 
 def add_passwordgenerator(request, vault_id):
   form = PasswordGeneratorForm(request.POST)
