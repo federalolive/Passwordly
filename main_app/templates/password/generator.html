@@ -1,12 +1,9 @@
-{% extends 'base.html' %}
-{% block content %}
-
 <h1>Password Generator</h1>
 
 <form action="{% url 'password' %}">
+    <input name="name">Name
     <select name="length">
         <option value="8">8</option>
-        <option value="10">10</option>
         <option value="12">12</option>
         <option value="16">16</option>
         <option value="20">20</option>
@@ -24,10 +21,11 @@
         <option value="150">150</option>
         <option value="175">175</option>
         <option value="200">200</option>
-    </select>
-
-    <input type="submit" value="Generate Password">
+    </select> Password length
+    <br><br>
+    <textarea name="notes"></textarea>
+    <hr>
+    <input type="submit" value="Generate"> 
 </form>
 
 
-{% endblock  %}

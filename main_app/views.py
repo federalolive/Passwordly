@@ -58,7 +58,7 @@ def about(request):
 
 def vaults_index(request):
     vaults = Vault.objects.filter(user = request.user)
-    return render(request, 'accounts/index.html', { 'vaults': vaults })
+    return render(request, 'password/index.html', { 'vaults': vaults })
 
 def add_passwordgenerator(request, vault_id):
   form = PasswordGeneratorForm(request.POST)
