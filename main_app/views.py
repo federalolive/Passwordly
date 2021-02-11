@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponse
 from django.utils.crypto import get_random_string
@@ -8,8 +8,21 @@ from .forms import PasswordGeneratorForm
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 
-SIMILARS = {'o', 'O', '0', 'I', 'l', '1', '|'}
+def signup(request):
+    error_message = ''
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('index')
+        else:
+            error_message = 'Invalid credentials - try again'
+    form = UserCreationForm()
+    context = {'form': form, 'error_message': error_message}
+    return render(request, 'registration/signup.html', context)
 
+SIMILARS = {'o', 'O', '0', 'I', 'l', '1', '|'}
 
 def generate_password(request):
     form = PasswordGeneratorForm(request.POST or None)
@@ -46,3 +59,5 @@ def about(request):
 def stores_index(request):
     stores = Store.objects.filter(user = request.user)
     return render(request, 'accounts/index.html', { 'stores': stores })
+
+
