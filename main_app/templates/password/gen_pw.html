@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %} 
+
+
+    <form action="{% url 'password' %}" method="post">
+    {% csrf_token %}
+      <br>
+      <div id=password>
+      <output name="password" size="{{ length }}">{{ password }}</output>
+      </div>
+      <br>
+      <ul>
+      {{ form.as_ul }}
+      </ul>
+      <br>
+      <input type="submit" value="Generate New Password">
+    </form>
+
+    <form action="{% url 'password' %}" method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input name="name">{{ store.name }}</input>
+      <input name="site">{{ store.site }}</input>
+      <input name="description">{{ store.description }}</input>
+      <input name="password" value="{{ password }}" type="hidden"></input>
+      
+    </form>
+    
+
+
+{% endblock %}
