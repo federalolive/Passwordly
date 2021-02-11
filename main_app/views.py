@@ -3,7 +3,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponse
 from django.utils.crypto import get_random_string
 import string, random
-from .models import Store
+from .models import Vault
 from .forms import PasswordGeneratorForm
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
@@ -56,16 +56,16 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
-def stores_index(request):
-    stores = Store.objects.filter(user = request.user)
-    return render(request, 'accounts/index.html', { 'stores': stores })
+def vaults_index(request):
+    vaults = Vault.objects.filter(user = request.user)
+    return render(request, 'accounts/index.html', { 'vaults': vaults })
 
-def add_passwordgenerator(request, store_id):
+def add_passwordgenerator(request, vault_id):
   form = PasswordGeneratorForm(request.POST)
   if form.is_valid():
     new_passwordgenerator = form.save(commit=False)
-    new_passwordgenerator.store_id = store_id
+    new_passwordgenerator.vault_id = vault_id
     new_passwordgenerator.save()
-  return redirect('detail', store_id=store_id)
+  return redirect('detail', vault_id=vault_id)
 
 
