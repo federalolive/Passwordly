@@ -37,7 +37,7 @@ def generate_password(request):
             charset += string.ascii_uppercase
         if data['use_digits']:
             charset += string.digits
-        if data['use_specials']:
+        if data['use_special']:
             charset += string.punctuation
 
         if data['avoid_similar']:
@@ -48,7 +48,7 @@ def generate_password(request):
         print(generate_password)
         context = {'password': password, 'length': length, 'form': form}
 
-    return render(request, 'password/index.html', context)
+    return render(request, 'password/gen_pw.html', context)
 
 def home(request):
     return render(request, 'home.html')
@@ -59,5 +59,13 @@ def about(request):
 def stores_index(request):
     stores = Store.objects.filter(user = request.user)
     return render(request, 'accounts/index.html', { 'stores': stores })
+
+def add_passwordgenerator(request, store_id):
+  form = PasswordGeneratorForm(request.POST)
+  if form.is_valid():
+    new_passwordgenerator = form.save(commit=False)
+    new_passwordgenerator.store_id = store_id
+    new_passwordgenerator.save()
+  return redirect('detail', store_id=store_id)
 
 
