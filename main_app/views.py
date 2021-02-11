@@ -5,6 +5,8 @@ from django.utils.crypto import get_random_string
 import string, random
 from .models import Store
 from .forms import PasswordGeneratorForm
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
 
 SIMILARS = {'o', 'O', '0', 'I', 'l', '1', '|'}
 
