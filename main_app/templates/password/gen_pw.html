@@ -16,13 +16,13 @@
       <input type="submit" value="Generate New Password">
     </form>
 
-    <form action="{% url 'password' vault.id %}" method="post">
+    <form action="{% url 'add_gen_pass' %}" method="post">
       {% csrf_token %}
-      {{ form.as_p }}
-      <input name="name">{{ store.name }}</input>
-      <input name="site">{{ store.site }}</input>
-      <input name="description">{{ store.description }}</input>
-      <input name="password" value="{{ password }}" type="hidden"></input>
+      {{ gen_pass_form.as_p }}
+      <input name="name">{{ vault.name }}</input>
+      <input name="site">{{ vault.site }}</input>
+      <input name="description">{{ vault.description }}</input>
+      <input name="pw" value="{{ password }}" type="hidden"></input>
       <input type="submit" class="btn" value="Generate Password">
       
     </form>

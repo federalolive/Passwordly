@@ -10,6 +10,6 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/signup/', views.signup, name='signup'),
     path('password/', views.generate_password, name='password'),
-    path('passwords/<int:vault_id>/add_pw/', views.add_passwordgenerator, name='add_gen_pass'),
+    path('passwords/add_pw/', views.add_passwordgenerator, name='add_gen_pass'),
     
 ]

@@ -6,7 +6,7 @@ from django.utils.crypto import get_random_string
 from django.contrib.auth.mixins import LoginRequiredMixin
 import string, random
 from .models import Vault
-from .forms import PasswordGeneratorForm
+from .forms import PasswordGeneratorForm, VaultForm
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 
@@ -60,8 +60,6 @@ def generate_password(request):
 
     return render(request, 'password/gen_pw.html', context)
 
-
-
 def home(request):
     return render(request, 'home.html')
 
@@ -79,12 +77,12 @@ def vaults_detail(request, vault_id):
     'vault': vault, 'gen_pass_form': gen_pass_form,
   })
 
-def add_passwordgenerator(request, vault_id):
-  form = PasswordGeneratorForm(request.POST)
+def add_passwordgenerator(request):
+  form = VaultForm(request.POST) 
   if form.is_valid():
     new_passwordgenerator = form.save(commit=False)
-    new_passwordgenerator.vault_id = vault_id
+    new_passwordgenerator.user = request.user
     new_passwordgenerator.save()
-  return redirect('detail', vault_id=vault_id)
+  return redirect('index')
 
 

@@ -2,14 +2,15 @@
 {% block content %}
 
 <h1>Password Library</h1>
-  <a href="{% url 'index' %}">
+
+  {% for vault in vaults %}
     <div class="card">
         <div class="card-content">
             <span class="card-title">{{ vault.name }}</span>
             <p>Site: {{ vault.site }}</p>
-            <p>Password: {{ password }}</p>
+            <p>Password {{vault.pw}}</p>
         </div>
     </div>
-  </a>
+  {% endfor %}
 
 {% endblock %}
