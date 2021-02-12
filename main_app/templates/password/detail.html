@@ -2,5 +2,9 @@
 {% block content %}
 
 <h1>Details</h1>
+        <span class="card-title">{{ vault.name }}</span>
+        <p>Site Url: {{ vault.site }}</p>
+        <p>Description: {{ vault.description }}</p>
+        <p>Password: {{ vault.pw}}</p>
 
 {% endblock  %}
