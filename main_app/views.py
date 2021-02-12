@@ -73,7 +73,7 @@ def vaults_index(request):
 def vaults_detail(request, vault_id):
     vault = Vault.objects.get(id=vault_id)
     gen_pass_form = PasswordGeneratorForm()
-    return render(request, 'vaults/detail.html', {
+    return render(request, 'password/detail.html', {
     'vault': vault, 'gen_pass_form': gen_pass_form,
   })
 
