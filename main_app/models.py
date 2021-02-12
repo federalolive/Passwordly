@@ -8,7 +8,6 @@ class Vault(models.Model):
     site = models.CharField(max_length=200)
     description = models.TextField(max_length=200)
     pw = models.CharField(max_length=200)
-    # create custom form and import it to mirror model except for user see feeding form on catcollector
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
