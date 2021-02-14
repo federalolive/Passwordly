@@ -28,6 +28,14 @@ class VaultCreate(LoginRequiredMixin, CreateView):
     model = Vault
     fields = ['name', 'site', 'description', 'pw']
 
+class VaultUpdate(LoginRequiredMixin, UpdateView):
+    model = Vault
+    fields = ['name', 'site', 'description', 'pw']
+
+class VaultDelete(LoginRequiredMixin, DeleteView):
+    model = Vault
+    success_url = '/vaults/'
+
 def form_valid(self, form):
     form.instance.user = self.request.user
     return super().form_valid(form)

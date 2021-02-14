@@ -6,5 +6,8 @@
         <p>Site Url: {{ vault.site }}</p>
         <p>Description: {{ vault.description }}</p>
         <p>Password: {{ vault.pw}}</p>
+      <div class="card-action">
+        <a href="{% url 'vaults_delete' vault.id %}">Delete</a>
+      </div>
 
 {% endblock  %}
