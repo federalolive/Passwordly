@@ -34,7 +34,7 @@ class VaultUpdate(LoginRequiredMixin, UpdateView):
 
 class VaultDelete(LoginRequiredMixin, DeleteView):
     model = Vault
-    success_url = '/vaults/'
+    success_url = '/passwords/'
 
 def form_valid(self, form):
     form.instance.user = self.request.user
