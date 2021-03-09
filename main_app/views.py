@@ -30,9 +30,8 @@ class VaultCreate(LoginRequiredMixin, CreateView):
 
 class VaultUpdate(LoginRequiredMixin, UpdateView):
     model = Vault
-    fields = ['name', 'site', 'description']
-git add .
-git commit -m"
+    fields = ['name', 'site', 'description', 'pw']
+
 class VaultDelete(LoginRequiredMixin, DeleteView):
     model = Vault
     success_url = '/passwords/'
